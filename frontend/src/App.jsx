@@ -1,6 +1,10 @@
 
 import React, { useState } from "react";
 
+import StudentDashboard from "./pages/StudentDashboard";
+import FacultyDashboard from "./pages/FacultyDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+
 function App() {
   const [role, setRole] = useState("Student");
   const [page, setPage] = useState("login");
@@ -8,51 +12,88 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Login function
   const handleLogin = (e) => {
     e.preventDefault();
-    alert("Login UI completed! Backend authentication is pending.");
+    setPage("dashboard");
   };
 
+  // Forgot password function
   const handleForgotPassword = (e) => {
     e.preventDefault();
     alert("Password reset functionality will be connected to the backend.");
   };
 
+  // Role-based dashboard navigation
+  if (page === "dashboard") {
+    return (
+      <div>
+        {role === "Student" && <StudentDashboard />}
+        {role === "Faculty" && <FacultyDashboard />}
+        {role === "Admin" && <AdminDashboard />}
+
+        <button
+          onClick={() => {
+            setPage("login");
+            setPassword("");
+          }}
+          style={{
+            padding: "10px 20px",
+            margin: "20px",
+            background: "#4f46e5",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer"
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div style={{
-      minHeight: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "20px",
-      background: "linear-gradient(135deg, #e0e7ff, #f3e8ff)",
-      fontFamily: "'Poppins', 'Segoe UI', sans-serif"
-    }}>
-
-      <div style={{
-        background: "#ffffff",
-        padding: "35px",
-        borderRadius: "20px",
-        width: "100%",
-        maxWidth: "380px",
-        boxShadow: "0 12px 35px rgba(79, 70, 229, 0.15)"
-      }}>
-
-        <h2 style={{
-          color: "#4338ca",
-          textAlign: "center",
-          fontSize: "25px",
-          marginBottom: "8px"
-        }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+        background: "linear-gradient(135deg, #e0e7ff, #f3e8ff)",
+        fontFamily: "'Poppins', 'Segoe UI', sans-serif"
+      }}
+    >
+      <div
+        style={{
+          background: "#ffffff",
+          padding: "35px",
+          borderRadius: "20px",
+          width: "100%",
+          maxWidth: "380px",
+          boxShadow: "0 12px 35px rgba(79, 70, 229, 0.15)"
+        }}
+      >
+        <h2
+          style={{
+            color: "#4338ca",
+            textAlign: "center",
+            fontSize: "25px",
+            marginBottom: "8px"
+          }}
+        >
           Assignment Evaluation
         </h2>
 
-        <p style={{
-          textAlign: "center",
-          color: "#64748b",
-          fontSize: "13px",
-          marginBottom: "25px"
-        }}>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#64748b",
+            fontSize: "13px",
+            marginBottom: "25px"
+          }}
+        >
           Anonymous Assignment Evaluation System
         </p>
 
@@ -65,8 +106,8 @@ function App() {
             </p>
 
             <form onSubmit={handleLogin}>
-
               <label>Select Role</label>
+
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
@@ -78,6 +119,7 @@ function App() {
               </select>
 
               <label>Email Address</label>
+
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -88,6 +130,7 @@ function App() {
               />
 
               <label>Password</label>
+
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
@@ -97,18 +140,21 @@ function App() {
                 required
               />
 
-              <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "10px",
-                fontSize: "13px"
-              }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "10px",
+                  fontSize: "13px"
+                }}
+              >
                 <label>
                   <input
                     type="checkbox"
                     checked={showPassword}
                     onChange={() => setShowPassword(!showPassword)}
-                  /> Show Password
+                  />
+                  {" "}Show Password
                 </label>
 
                 <button
@@ -123,7 +169,6 @@ function App() {
               <button type="submit" style={buttonStyle}>
                 Login
               </button>
-
             </form>
           </>
         ) : (
@@ -136,6 +181,7 @@ function App() {
 
             <form onSubmit={handleForgotPassword}>
               <label>Email Address</label>
+
               <input
                 type="email"
                 placeholder="Enter your registered email"
@@ -164,20 +210,22 @@ function App() {
           </>
         )}
 
-        <p style={{
-          textAlign: "center",
-          color: "#94a3b8",
-          fontSize: "12px",
-          marginTop: "25px"
-        }}>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#94a3b8",
+            fontSize: "12px",
+            marginTop: "25px"
+          }}
+        >
           © 2026 Anonymous Assignment Evaluation System
         </p>
-
       </div>
     </div>
   );
 }
 
+// Input styling
 const inputStyle = {
   width: "100%",
   padding: "12px",
@@ -190,6 +238,7 @@ const inputStyle = {
   outlineColor: "#6366f1"
 };
 
+// Button styling
 const buttonStyle = {
   width: "100%",
   padding: "13px",
@@ -203,6 +252,7 @@ const buttonStyle = {
   cursor: "pointer"
 };
 
+// Link styling
 const linkStyle = {
   background: "none",
   border: "none",
