@@ -1,29 +1,37 @@
 
 import React, { useEffect, useState } from "react";
+import EvaluateSubmission from "./EvaluateSubmission";
 
 function AnonymousSubmissions({ onBack }) {
   const [submissions, setSubmissions] = useState([]);
+  const [selectedSubmission, setSelectedSubmission] = useState(null);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    const savedSubmissions = JSON.parse(
+  const loadSubmissions = () => {
+    const saved = JSON.parse(
       localStorage.getItem("submissions") || "[]"
     );
+    setSubmissions(saved);
+  };
 
-    setSubmissions(savedSubmissions);
+  useEffect(() => {
+    loadSubmissions();
   }, []);
 
-  // Download the uploaded file from IndexedDB
+  if (selectedSubmission) {
+    return (
+      <EvaluateSubmission
+        submission={selectedSubmission}
+        onBack={() => {
+          setSelectedSubmission(null);
+          loadSubmissions();
+        }}
+      />
+    );
+  }
+
   const handleDownload = (submission) => {
     const request = indexedDB.open("AAESDatabase", 1);
-
-    request.onupgradeneeded = () => {
-      const db = request.result;
-
-      if (!db.objectStoreNames.contains("submissionFiles")) {
-        db.createObjectStore("submissionFiles");
-      }
-    };
 
     request.onsuccess = () => {
       const db = request.result;
@@ -52,7 +60,7 @@ function AnonymousSubmissions({ onBack }) {
         link.download = submission.fileName;
         link.click();
 
-        URL.revokeObjectURL(url);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
         db.close();
         setMessage("File downloaded successfully!");
       };
@@ -68,17 +76,17 @@ function AnonymousSubmissions({ onBack }) {
     };
   };
 
+  const pendingCount = submissions.filter(
+    (item) => item.status !== "Evaluated"
+  ).length;
+
   return (
     <div className="dashboard">
-      <button onClick={onBack} style={styles.backButton}>
+      <button onClick={onBack}>
         ← Back to Faculty Dashboard
       </button>
 
       <h1>Anonymous Submissions</h1>
-
-      <p>
-        View submitted assignments without seeing student identities.
-      </p>
 
       <div className="dashboard-cards">
         <div className="card">
@@ -88,24 +96,25 @@ function AnonymousSubmissions({ onBack }) {
 
         <div className="card">
           <h3>Pending Evaluation</h3>
-          <h2>{submissions.length}</h2>
+          <h2>{pendingCount}</h2>
+        </div>
+
+        <div className="card">
+          <h3>Completed Evaluations</h3>
+          <h2>{submissions.length - pendingCount}</h2>
         </div>
       </div>
 
+      {message && <p>{message}</p>}
+
       <h2>Submitted Assignments</h2>
 
-      {message && (
-        <p style={styles.message}>{message}</p>
-      )}
-
       {submissions.length === 0 ? (
-        <p style={styles.empty}>
-          No student submissions available yet.
-        </p>
+        <p>No student submissions available yet.</p>
       ) : (
-        <div style={styles.list}>
+        <div>
           {submissions.map((item, index) => (
-            <div key={item.id} style={styles.card}>
+            <div className="card" key={item.id}>
               <h3>Submission #{index + 1}</h3>
 
               <p>
@@ -113,7 +122,7 @@ function AnonymousSubmissions({ onBack }) {
               </p>
 
               <p>
-                <b>File Name:</b> {item.fileName}
+                <b>File:</b> {item.fileName}
               </p>
 
               <p>
@@ -121,18 +130,27 @@ function AnonymousSubmissions({ onBack }) {
               </p>
 
               <p>
-                <b>Status:</b>{" "}
-                <span style={styles.status}>
-                  {item.status}
-                </span>
+                <b>Status:</b> {item.status}
               </p>
 
               <button
                 onClick={() => handleDownload(item)}
-                style={styles.downloadButton}
               >
                 Download Assignment
               </button>
+
+              {item.status === "Evaluated" ? (
+                <p style={{ color: "green" }}>
+                  Evaluation Completed
+                </p>
+              ) : (
+                <button
+                  onClick={() => setSelectedSubmission(item)}
+                  style={{ marginLeft: "10px" }}
+                >
+                  Evaluate Assignment
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -140,60 +158,5 @@ function AnonymousSubmissions({ onBack }) {
     </div>
   );
 }
-
-const styles = {
-  backButton: {
-    padding: "10px 18px",
-    marginBottom: "20px",
-    background: "#64748b",
-    color: "white",
-    border: "none",
-    borderRadius: "7px",
-    cursor: "pointer"
-  },
-
-  list: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "20px",
-    marginTop: "20px"
-  },
-
-  card: {
-    background: "white",
-    padding: "20px",
-    borderRadius: "10px",
-    boxShadow: "0 3px 12px rgba(0,0,0,0.08)",
-    borderLeft: "5px solid #4f46e5",
-    color: "#334155"
-  },
-
-  status: {
-    color: "#166534",
-    fontWeight: "bold"
-  },
-
-  downloadButton: {
-    padding: "10px 15px",
-    background: "#4f46e5",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    marginTop: "10px"
-  },
-
-  empty: {
-    padding: "20px",
-    background: "#f1f5f9",
-    borderRadius: "8px",
-    color: "#64748b"
-  },
-
-  message: {
-    color: "#166534",
-    fontWeight: "bold"
-  }
-};
 
 export default AnonymousSubmissions;
