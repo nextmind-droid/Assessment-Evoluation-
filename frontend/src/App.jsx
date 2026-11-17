@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ManageStudents from "./pages/ManageStudents";
 import ManageFaculty from "./pages/ManageFaculty";
 import ManageSubjects from "./pages/ManageSubjects";
+import ManageAssignments from "./pages/ManageAssignments";
 
 function App() {
   const [role, setRole] = useState("Student");
@@ -37,6 +38,7 @@ function App() {
             onManageStudents={() => setPage("manageStudents")}
             onManageFaculty={() => setPage("manageFaculty")}
             onManageSubjects={() => setPage("manageSubjects")}
+            onManageAssignments={() => setPage("manageAssignments")}
           />
         )}
 
@@ -89,6 +91,18 @@ function App() {
     );
   }
 
+  // Manage Assignments
+  if (page === "manageAssignments") {
+    return (
+      <div>
+        <ManageAssignments />
+        <button onClick={() => setPage("dashboard")} style={logoutStyle}>
+          ← Back to Admin Dashboard
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -122,12 +136,14 @@ function App() {
         {page === "login" ? (
           <>
             <h3 style={{ color: "#1e293b" }}>Welcome Back!</h3>
+
             <p style={{ color: "#64748b", fontSize: "14px" }}>
               Please login to continue
             </p>
 
             <form onSubmit={handleLogin}>
               <label>Select Role</label>
+
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
@@ -139,6 +155,7 @@ function App() {
               </select>
 
               <label>Email Address</label>
+
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -149,6 +166,7 @@ function App() {
               />
 
               <label>Password</label>
+
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
@@ -192,12 +210,14 @@ function App() {
         ) : (
           <>
             <h3 style={{ color: "#1e293b" }}>Forgot Password?</h3>
+
             <p style={{ color: "#64748b", fontSize: "14px" }}>
               Enter your registered email address to reset your password.
             </p>
 
             <form onSubmit={handleForgotPassword}>
               <label>Email Address</label>
+
               <input
                 type="email"
                 placeholder="Enter your registered email"
@@ -226,7 +246,14 @@ function App() {
           </>
         )}
 
-        <p style={{ textAlign: "center", color: "#94a3b8", fontSize: "12px", marginTop: "25px" }}>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#94a3b8",
+            fontSize: "12px",
+            marginTop: "25px"
+          }}
+        >
           © 2026 Anonymous Assignment Evaluation System
         </p>
       </div>
