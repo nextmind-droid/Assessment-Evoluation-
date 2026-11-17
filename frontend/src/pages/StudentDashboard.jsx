@@ -1,17 +1,55 @@
-
 import React, { useState, useEffect } from "react";
+import StudentSubmission from "./StudentSubmission";
 
 function StudentDashboard() {
   const [assignments, setAssignments] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
 
-  // Load assignments from browser storage
-  useEffect(() => {
+  // Load assignments and submissions from browser storage
+  const loadData = () => {
     const savedAssignments = JSON.parse(
       localStorage.getItem("assignments") || "[]"
     );
 
+    const savedSubmissions = JSON.parse(
+      localStorage.getItem("submissions") || "[]"
+    );
+
     setAssignments(savedAssignments);
+    setSubmissions(savedSubmissions);
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
+
+  // Check whether an assignment has been submitted
+  const isSubmitted = (assignmentId) => {
+    return submissions.some(
+      (submission) =>
+        String(submission.assignmentId) === String(assignmentId)
+    );
+  };
+
+  const submittedCount = assignments.filter(
+    (item) => isSubmitted(item.id)
+  ).length;
+
+  const pendingCount = assignments.length - submittedCount;
+
+  // Open submission page
+  if (selectedAssignment) {
+    return (
+      <StudentSubmission
+        assignment={selectedAssignment}
+        onBack={() => {
+          setSelectedAssignment(null);
+          loadData();
+        }}
+      />
+    );
+  }
 
   return (
     <div className="dashboard">
@@ -23,7 +61,6 @@ function StudentDashboard() {
 
       {/* Dashboard Statistics */}
       <div className="dashboard-cards">
-
         <div className="card">
           <h3>Total Assignments</h3>
           <h2>{assignments.length}</h2>
@@ -31,19 +68,18 @@ function StudentDashboard() {
 
         <div className="card">
           <h3>Pending Assignments</h3>
-          <h2>{assignments.length}</h2>
+          <h2>{pendingCount}</h2>
         </div>
 
         <div className="card">
           <h3>Submitted Assignments</h3>
-          <h2>0</h2>
+          <h2>{submittedCount}</h2>
         </div>
 
         <div className="card">
           <h3>Published Results</h3>
           <h2>0</h2>
         </div>
-
       </div>
 
       {/* Available Assignments */}
@@ -59,46 +95,61 @@ function StudentDashboard() {
         </p>
       ) : (
         <div style={styles.assignmentList}>
+          {assignments.map((item) => {
+            const submitted = isSubmitted(item.id);
 
-          {assignments.map((item) => (
-            <div key={item.id} style={styles.assignmentCard}>
+            return (
+              <div key={item.id} style={styles.assignmentCard}>
+                <h3 style={styles.title}>
+                  {item.title}
+                </h3>
 
-              <h3 style={styles.title}>
-                {item.title}
-              </h3>
+                <p>
+                  <b>Subject:</b> {item.subject}
+                </p>
 
-              <p>
-                <b>Subject:</b> {item.subject}
-              </p>
+                <p>
+                  <b>Description:</b> {item.description}
+                </p>
 
-              <p>
-                <b>Description:</b> {item.description}
-              </p>
+                <p>
+                  <b>Assigned Date:</b> {item.assignedDate}
+                </p>
 
-              <p>
-                <b>Assigned Date:</b> {item.assignedDate}
-              </p>
+                <p>
+                  <b>Submission Deadline:</b> {item.deadline}
+                </p>
 
-              <p>
-                <b>Submission Deadline:</b> {item.deadline}
-              </p>
+                <p>
+                  <b>Maximum Marks:</b> {item.maxMarks}
+                </p>
 
-              <p>
-                <b>Maximum Marks:</b> {item.maxMarks}
-              </p>
+                <p>
+                  <b>Attachment:</b>{" "}
+                  {item.fileName || "No attachment"}
+                </p>
 
-              <p>
-                <b>Attachment:</b>{" "}
-                {item.fileName || "No attachment"}
-              </p>
+                <span
+                  style={
+                    submitted
+                      ? styles.submittedStatus
+                      : styles.status
+                  }
+                >
+                  {submitted ? "Submitted" : "Pending Submission"}
+                </span>
 
-              <span style={styles.status}>
-                Pending Submission
-              </span>
+                <br />
 
-            </div>
-          ))}
-
+                <button
+                  style={styles.submitButton}
+                  onClick={() => setSelectedAssignment(item)}
+                >
+                  {submitted ? "View / Resubmit" : "Submit Assignment"}
+                </button>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -109,7 +160,6 @@ function StudentDashboard() {
         Your marks and faculty feedback will appear here
         after evaluation and publication.
       </p>
-
     </div>
   );
 }
@@ -145,6 +195,27 @@ const styles = {
     borderRadius: "6px",
     fontSize: "13px",
     fontWeight: "bold"
+  },
+
+  submittedStatus: {
+    display: "inline-block",
+    marginTop: "10px",
+    padding: "7px 12px",
+    background: "#dcfce7",
+    color: "#166534",
+    borderRadius: "6px",
+    fontSize: "13px",
+    fontWeight: "bold"
+  },
+
+  submitButton: {
+    marginTop: "15px",
+    padding: "10px 16px",
+    background: "#4f46e5",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer"
   },
 
   empty: {
