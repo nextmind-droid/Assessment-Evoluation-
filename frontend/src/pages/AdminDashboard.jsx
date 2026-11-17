@@ -5,7 +5,8 @@ function AdminDashboard({
   onManageStudents,
   onManageFaculty,
   onManageSubjects,
-  onManageAssignments
+  onManageAssignments,
+  onMonitorSubmissions
 }) {
   const [students] = useState(
     JSON.parse(localStorage.getItem("students") || "[]")
@@ -62,23 +63,28 @@ function AdminDashboard({
       <h2>Management</h2>
 
       <div className="management-list">
-
         <div className="card">
           <h3>Manage Students</h3>
           <p>Add, view and delete student details.</p>
-          <button onClick={onManageStudents}>Manage Students</button>
+          <button onClick={onManageStudents}>
+            Manage Students
+          </button>
         </div>
 
         <div className="card">
           <h3>Manage Faculty</h3>
           <p>Add, view and delete faculty details.</p>
-          <button onClick={onManageFaculty}>Manage Faculty</button>
+          <button onClick={onManageFaculty}>
+            Manage Faculty
+          </button>
         </div>
 
         <div className="card">
           <h3>Manage Subjects</h3>
           <p>Add, view and delete subject details.</p>
-          <button onClick={onManageSubjects}>Manage Subjects</button>
+          <button onClick={onManageSubjects}>
+            Manage Subjects
+          </button>
         </div>
 
         <div className="card">
@@ -92,8 +98,10 @@ function AdminDashboard({
         <div className="card">
           <h3>Monitor Submissions</h3>
           <p>Monitor student assignment submissions.</p>
+          <button onClick={onMonitorSubmissions}>
+            Monitor Submissions
+          </button>
         </div>
-
       </div>
     </div>
   );
