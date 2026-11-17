@@ -5,6 +5,7 @@ import StudentDashboard from "./pages/StudentDashboard";
 import FacultyDashboard from "./pages/FacultyDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import ManageStudents from "./pages/ManageStudents";
+import ManageFaculty from "./pages/ManageFaculty";
 
 function App() {
   const [role, setRole] = useState("Student");
@@ -28,10 +29,13 @@ function App() {
     return (
       <div>
         {role === "Student" && <StudentDashboard />}
+
         {role === "Faculty" && <FacultyDashboard />}
+
         {role === "Admin" && (
           <AdminDashboard
             onManageStudents={() => setPage("manageStudents")}
+            onManageFaculty={() => setPage("manageFaculty")}
           />
         )}
 
@@ -53,6 +57,22 @@ function App() {
     return (
       <div>
         <ManageStudents />
+
+        <button
+          onClick={() => setPage("dashboard")}
+          style={logoutStyle}
+        >
+          ← Back to Admin Dashboard
+        </button>
+      </div>
+    );
+  }
+
+  // Manage Faculty page
+  if (page === "manageFaculty") {
+    return (
+      <div>
+        <ManageFaculty />
 
         <button
           onClick={() => setPage("dashboard")}
@@ -96,11 +116,15 @@ function App() {
 
         {page === "login" ? (
           <>
-            <h3>Welcome Back!</h3>
-            <p>Please login to continue</p>
+            <h3 style={{ color: "#1e293b" }}>Welcome Back!</h3>
+
+            <p style={{ color: "#64748b", fontSize: "14px" }}>
+              Please login to continue
+            </p>
 
             <form onSubmit={handleLogin}>
               <label>Select Role</label>
+
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
@@ -112,6 +136,7 @@ function App() {
               </select>
 
               <label>Email Address</label>
+
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -122,6 +147,7 @@ function App() {
               />
 
               <label>Password</label>
+
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
@@ -131,7 +157,14 @@ function App() {
                 required
               />
 
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "10px",
+                  fontSize: "13px"
+                }}
+              >
                 <label>
                   <input
                     type="checkbox"
@@ -157,11 +190,15 @@ function App() {
           </>
         ) : (
           <>
-            <h3>Forgot Password?</h3>
-            <p>Enter your registered email address to reset your password.</p>
+            <h3 style={{ color: "#1e293b" }}>Forgot Password?</h3>
+
+            <p style={{ color: "#64748b", fontSize: "14px" }}>
+              Enter your registered email address to reset your password.
+            </p>
 
             <form onSubmit={handleForgotPassword}>
               <label>Email Address</label>
+
               <input
                 type="email"
                 placeholder="Enter your registered email"
@@ -181,7 +218,8 @@ function App() {
               style={{
                 ...buttonStyle,
                 background: "#e0e7ff",
-                color: "#4338ca"
+                color: "#4338ca",
+                marginTop: "12px"
               }}
             >
               ← Back to Login
@@ -189,7 +227,14 @@ function App() {
           </>
         )}
 
-        <p style={{ textAlign: "center", color: "#94a3b8", fontSize: "12px" }}>
+        <p
+          style={{
+            textAlign: "center",
+            color: "#94a3b8",
+            fontSize: "12px",
+            marginTop: "25px"
+          }}
+        >
           © 2026 Anonymous Assignment Evaluation System
         </p>
       </div>
@@ -205,7 +250,8 @@ const inputStyle = {
   border: "1px solid #cbd5e1",
   borderRadius: "8px",
   boxSizing: "border-box",
-  fontSize: "14px"
+  fontSize: "14px",
+  outlineColor: "#6366f1"
 };
 
 const buttonStyle = {
