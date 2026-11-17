@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-function AdminDashboard() {
+function AdminDashboard({ onManageStudents }) {
   const [students] = useState(
     JSON.parse(localStorage.getItem("students") || "[]")
   );
@@ -18,20 +18,14 @@ function AdminDashboard() {
     JSON.parse(localStorage.getItem("submissions") || "[]")
   );
 
-  const managementOptions = [
-    "Manage Students",
-    "Manage Faculty",
-    "Manage Subjects",
-    "Manage Assignments",
-    "Monitor Submissions"
-  ];
-
   return (
     <div className="dashboard">
       <h1>Admin Dashboard</h1>
       <p>Welcome, Admin!</p>
 
+      {/* Dashboard Statistics */}
       <div className="dashboard-cards">
+
         <div className="card">
           <h3>Total Students</h3>
           <p>{students.length}</p>
@@ -51,17 +45,43 @@ function AdminDashboard() {
           <h3>Total Submissions</h3>
           <p>{submissions.length}</p>
         </div>
+
       </div>
 
+      {/* Management Section */}
       <h2>Management</h2>
 
       <div className="management-list">
-        {managementOptions.map((option, index) => (
-          <div className="card" key={index}>
-            <h3>{option}</h3>
-            <p>Manage and monitor {option.toLowerCase()}.</p>
-          </div>
-        ))}
+
+        <div className="card">
+          <h3>Manage Students</h3>
+          <p>Add, view and delete student details.</p>
+
+          <button onClick={onManageStudents}>
+            Manage Students
+          </button>
+        </div>
+
+        <div className="card">
+          <h3>Manage Faculty</h3>
+          <p>Manage faculty information.</p>
+        </div>
+
+        <div className="card">
+          <h3>Manage Subjects</h3>
+          <p>Add and manage subjects.</p>
+        </div>
+
+        <div className="card">
+          <h3>Manage Assignments</h3>
+          <p>View and manage assignments.</p>
+        </div>
+
+        <div className="card">
+          <h3>Monitor Submissions</h3>
+          <p>Monitor student assignment submissions.</p>
+        </div>
+
       </div>
     </div>
   );
