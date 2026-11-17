@@ -8,6 +8,7 @@ import ManageStudents from "./pages/ManageStudents";
 import ManageFaculty from "./pages/ManageFaculty";
 import ManageSubjects from "./pages/ManageSubjects";
 import ManageAssignments from "./pages/ManageAssignments";
+import MonitorSubmissions from "./pages/MonitorSubmissions";
 
 function App() {
   const [role, setRole] = useState("Student");
@@ -39,6 +40,7 @@ function App() {
             onManageFaculty={() => setPage("manageFaculty")}
             onManageSubjects={() => setPage("manageSubjects")}
             onManageAssignments={() => setPage("manageAssignments")}
+            onMonitorSubmissions={() => setPage("monitorSubmissions")}
           />
         )}
 
@@ -96,6 +98,18 @@ function App() {
     return (
       <div>
         <ManageAssignments />
+        <button onClick={() => setPage("dashboard")} style={logoutStyle}>
+          ← Back to Admin Dashboard
+        </button>
+      </div>
+    );
+  }
+
+  // Monitor Submissions
+  if (page === "monitorSubmissions") {
+    return (
+      <div>
+        <MonitorSubmissions />
         <button onClick={() => setPage("dashboard")} style={logoutStyle}>
           ← Back to Admin Dashboard
         </button>
