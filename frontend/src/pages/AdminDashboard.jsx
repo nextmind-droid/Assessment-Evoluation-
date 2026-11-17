@@ -4,7 +4,8 @@ import React, { useState } from "react";
 function AdminDashboard({
   onManageStudents,
   onManageFaculty,
-  onManageSubjects
+  onManageSubjects,
+  onManageAssignments
 }) {
   const [students] = useState(
     JSON.parse(localStorage.getItem("students") || "[]")
@@ -14,16 +15,16 @@ function AdminDashboard({
     JSON.parse(localStorage.getItem("faculty") || "[]")
   );
 
+  const [subjects] = useState(
+    JSON.parse(localStorage.getItem("subjects") || "[]")
+  );
+
   const [assignments] = useState(
     JSON.parse(localStorage.getItem("assignments") || "[]")
   );
 
   const [submissions] = useState(
     JSON.parse(localStorage.getItem("submissions") || "[]")
-  );
-
-  const [subjects] = useState(
-    JSON.parse(localStorage.getItem("subjects") || "[]")
   );
 
   return (
@@ -61,6 +62,7 @@ function AdminDashboard({
       <h2>Management</h2>
 
       <div className="management-list">
+
         <div className="card">
           <h3>Manage Students</h3>
           <p>Add, view and delete student details.</p>
@@ -81,13 +83,17 @@ function AdminDashboard({
 
         <div className="card">
           <h3>Manage Assignments</h3>
-          <p>View and manage assignments.</p>
+          <p>View and delete assignments.</p>
+          <button onClick={onManageAssignments}>
+            Manage Assignments
+          </button>
         </div>
 
         <div className="card">
           <h3>Monitor Submissions</h3>
           <p>Monitor student assignment submissions.</p>
         </div>
+
       </div>
     </div>
   );
