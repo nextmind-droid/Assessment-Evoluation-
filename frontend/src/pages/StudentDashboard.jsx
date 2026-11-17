@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import StudentSubmission from "./StudentSubmission";
 
@@ -6,7 +7,7 @@ function StudentDashboard() {
   const [submissions, setSubmissions] = useState([]);
   const [selectedAssignment, setSelectedAssignment] = useState(null);
 
-  // Load assignments and submissions from browser storage
+  // Load assignments and submissions
   const loadData = () => {
     const savedAssignments = JSON.parse(
       localStorage.getItem("assignments") || "[]"
@@ -24,7 +25,7 @@ function StudentDashboard() {
     loadData();
   }, []);
 
-  // Check whether an assignment has been submitted
+  // Check assignment submission status
   const isSubmitted = (assignmentId) => {
     return submissions.some(
       (submission) =>
@@ -32,13 +33,18 @@ function StudentDashboard() {
     );
   };
 
+  // Get evaluated submissions
+  const evaluatedSubmissions = submissions.filter(
+    (item) => item.status === "Evaluated"
+  );
+
   const submittedCount = assignments.filter(
     (item) => isSubmitted(item.id)
   ).length;
 
   const pendingCount = assignments.length - submittedCount;
 
-  // Open submission page
+  // Open student submission page
   if (selectedAssignment) {
     return (
       <StudentSubmission
@@ -78,7 +84,7 @@ function StudentDashboard() {
 
         <div className="card">
           <h3>Published Results</h3>
-          <h2>0</h2>
+          <h2>{evaluatedSubmissions.length}</h2>
         </div>
       </div>
 
@@ -100,29 +106,13 @@ function StudentDashboard() {
 
             return (
               <div key={item.id} style={styles.assignmentCard}>
-                <h3 style={styles.title}>
-                  {item.title}
-                </h3>
+                <h3 style={styles.title}>{item.title}</h3>
 
-                <p>
-                  <b>Subject:</b> {item.subject}
-                </p>
-
-                <p>
-                  <b>Description:</b> {item.description}
-                </p>
-
-                <p>
-                  <b>Assigned Date:</b> {item.assignedDate}
-                </p>
-
-                <p>
-                  <b>Submission Deadline:</b> {item.deadline}
-                </p>
-
-                <p>
-                  <b>Maximum Marks:</b> {item.maxMarks}
-                </p>
+                <p><b>Subject:</b> {item.subject}</p>
+                <p><b>Description:</b> {item.description}</p>
+                <p><b>Assigned Date:</b> {item.assignedDate}</p>
+                <p><b>Submission Deadline:</b> {item.deadline}</p>
+                <p><b>Maximum Marks:</b> {item.maxMarks}</p>
 
                 <p>
                   <b>Attachment:</b>{" "}
@@ -153,13 +143,64 @@ function StudentDashboard() {
         </div>
       )}
 
-      {/* Results Section */}
-      <h2>My Results</h2>
+      {/* Student Results Section */}
+      <h2>My Results & Feedback</h2>
 
       <p>
-        Your marks and faculty feedback will appear here
-        after evaluation and publication.
+        View your marks and faculty feedback after evaluation.
       </p>
+
+      {evaluatedSubmissions.length === 0 ? (
+        <p style={styles.empty}>
+          No results available yet. Your results will appear
+          after faculty evaluates your assignments.
+        </p>
+      ) : (
+        <div style={styles.assignmentList}>
+          {evaluatedSubmissions.map((item) => {
+            const assignment = assignments.find(
+              (a) =>
+                String(a.id) === String(item.assignmentId)
+            );
+
+            return (
+              <div key={item.id} style={styles.resultCard}>
+                <h3 style={styles.title}>
+                  {item.assignmentTitle}
+                </h3>
+
+                <p>
+                  <b>File:</b> {item.fileName}
+                </p>
+
+                <p>
+                  <b>Marks Obtained:</b>{" "}
+                  <span style={styles.marks}>
+                    {item.marks} / {assignment?.maxMarks || 100}
+                  </span>
+                </p>
+
+                <p>
+                  <b>Feedback:</b>
+                </p>
+
+                <p style={styles.feedback}>
+                  {item.feedback || "No feedback provided."}
+                </p>
+
+                <p>
+                  <b>Evaluation Date:</b>{" "}
+                  {item.evaluatedAt || "Not available"}
+                </p>
+
+                <span style={styles.evaluatedStatus}>
+                  Evaluated
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
@@ -178,6 +219,15 @@ const styles = {
     borderRadius: "12px",
     boxShadow: "0 3px 12px rgba(0,0,0,0.08)",
     borderLeft: "5px solid #4f46e5",
+    color: "#334155"
+  },
+
+  resultCard: {
+    background: "#ffffff",
+    padding: "20px",
+    borderRadius: "12px",
+    boxShadow: "0 3px 12px rgba(0,0,0,0.08)",
+    borderLeft: "5px solid #16a34a",
     color: "#334155"
   },
 
@@ -206,6 +256,28 @@ const styles = {
     borderRadius: "6px",
     fontSize: "13px",
     fontWeight: "bold"
+  },
+
+  evaluatedStatus: {
+    display: "inline-block",
+    padding: "7px 12px",
+    background: "#dcfce7",
+    color: "#166534",
+    borderRadius: "6px",
+    fontSize: "13px",
+    fontWeight: "bold"
+  },
+
+  marks: {
+    color: "#15803d",
+    fontSize: "18px",
+    fontWeight: "bold"
+  },
+
+  feedback: {
+    background: "#f1f5f9",
+    padding: "12px",
+    borderRadius: "8px"
   },
 
   submitButton: {
