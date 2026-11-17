@@ -14,32 +14,65 @@ function CreateAssignment() {
   const [file, setFile] = useState(null);
   const [created, setCreated] = useState(false);
 
+  // Handle input changes
   const handleChange = (e) => {
     setAssignment({
       ...assignment,
       [e.target.name]: e.target.value
     });
+
+    setCreated(false);
   };
 
+  // Save assignment details
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setCreated(true);
+    try {
+      const savedAssignments = JSON.parse(
+        localStorage.getItem("assignments") || "[]"
+      );
 
-    alert("Assignment created successfully!");
+      const newAssignment = {
+        ...assignment,
+        id: Date.now(),
+        fileName: file ? file.name : ""
+      };
+
+      savedAssignments.push(newAssignment);
+
+      localStorage.setItem(
+        "assignments",
+        JSON.stringify(savedAssignments)
+      );
+
+      setCreated(true);
+
+      alert("Assignment created successfully!");
+
+    } catch (error) {
+      alert("Unable to save assignment. Please try again.");
+    }
   };
 
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h1 style={styles.heading}>Create Assignment</h1>
+
+        <h1 style={styles.heading}>
+          Create Assignment
+        </h1>
 
         <p style={styles.subtitle}>
           Enter the assignment details below.
         </p>
 
         <form onSubmit={handleSubmit}>
-          <label style={styles.label}>Assignment Title</label>
+
+          <label style={styles.label}>
+            Assignment Title
+          </label>
+
           <input
             type="text"
             name="title"
@@ -50,7 +83,10 @@ function CreateAssignment() {
             required
           />
 
-          <label style={styles.label}>Subject</label>
+          <label style={styles.label}>
+            Subject
+          </label>
+
           <input
             type="text"
             name="subject"
@@ -61,7 +97,10 @@ function CreateAssignment() {
             required
           />
 
-          <label style={styles.label}>Description</label>
+          <label style={styles.label}>
+            Description
+          </label>
+
           <textarea
             name="description"
             placeholder="Enter assignment instructions"
@@ -71,7 +110,10 @@ function CreateAssignment() {
             required
           />
 
-          <label style={styles.label}>Assigned Date</label>
+          <label style={styles.label}>
+            Assigned Date
+          </label>
+
           <input
             type="date"
             name="assignedDate"
@@ -81,7 +123,10 @@ function CreateAssignment() {
             required
           />
 
-          <label style={styles.label}>Submission Deadline</label>
+          <label style={styles.label}>
+            Submission Deadline
+          </label>
+
           <input
             type="date"
             name="deadline"
@@ -92,7 +137,10 @@ function CreateAssignment() {
             required
           />
 
-          <label style={styles.label}>Maximum Marks</label>
+          <label style={styles.label}>
+            Maximum Marks
+          </label>
+
           <input
             type="number"
             name="maxMarks"
@@ -104,11 +152,17 @@ function CreateAssignment() {
             required
           />
 
-          <label style={styles.label}>Upload Assignment File (Optional)</label>
+          <label style={styles.label}>
+            Upload Assignment File (Optional)
+          </label>
+
           <input
             type="file"
             accept=".pdf,.doc,.docx"
-            onChange={(e) => setFile(e.target.files[0])}
+            onChange={(e) => {
+              setFile(e.target.files[0] || null);
+              setCreated(false);
+            }}
             style={styles.input}
           />
 
@@ -121,22 +175,45 @@ function CreateAssignment() {
           <button type="submit" style={styles.button}>
             Create Assignment
           </button>
+
         </form>
 
         {created && (
           <div style={styles.success}>
-            <h3>Assignment Created!</h3>
-            <p><b>Title:</b> {assignment.title}</p>
-            <p><b>Subject:</b> {assignment.subject}</p>
-            <p><b>Deadline:</b> {assignment.deadline}</p>
-            <p><b>Maximum Marks:</b> {assignment.maxMarks}</p>
+            <h3>Assignment Created Successfully!</h3>
+
+            <p>
+              <b>Title:</b> {assignment.title}
+            </p>
+
+            <p>
+              <b>Subject:</b> {assignment.subject}
+            </p>
+
+            <p>
+              <b>Assigned Date:</b> {assignment.assignedDate}
+            </p>
+
+            <p>
+              <b>Deadline:</b> {assignment.deadline}
+            </p>
+
+            <p>
+              <b>Maximum Marks:</b> {assignment.maxMarks}
+            </p>
+
+            <p>
+              <b>Attachment:</b> {file ? file.name : "No file"}
+            </p>
           </div>
         )}
+
       </div>
     </div>
   );
 }
 
+// Page styling
 const styles = {
   container: {
     minHeight: "100vh",
