@@ -1,7 +1,11 @@
 
 import React, { useState } from "react";
 
-function AdminDashboard({ onManageStudents, onManageFaculty }) {
+function AdminDashboard({
+  onManageStudents,
+  onManageFaculty,
+  onManageSubjects
+}) {
   const [students] = useState(
     JSON.parse(localStorage.getItem("students") || "[]")
   );
@@ -16,6 +20,10 @@ function AdminDashboard({ onManageStudents, onManageFaculty }) {
 
   const [submissions] = useState(
     JSON.parse(localStorage.getItem("submissions") || "[]")
+  );
+
+  const [subjects] = useState(
+    JSON.parse(localStorage.getItem("subjects") || "[]")
   );
 
   return (
@@ -35,6 +43,11 @@ function AdminDashboard({ onManageStudents, onManageFaculty }) {
         </div>
 
         <div className="card">
+          <h3>Total Subjects</h3>
+          <p>{subjects.length}</p>
+        </div>
+
+        <div className="card">
           <h3>Total Assignments</h3>
           <p>{assignments.length}</p>
         </div>
@@ -48,26 +61,22 @@ function AdminDashboard({ onManageStudents, onManageFaculty }) {
       <h2>Management</h2>
 
       <div className="management-list">
-
         <div className="card">
           <h3>Manage Students</h3>
           <p>Add, view and delete student details.</p>
-          <button onClick={onManageStudents}>
-            Manage Students
-          </button>
+          <button onClick={onManageStudents}>Manage Students</button>
         </div>
 
         <div className="card">
           <h3>Manage Faculty</h3>
           <p>Add, view and delete faculty details.</p>
-          <button onClick={onManageFaculty}>
-            Manage Faculty
-          </button>
+          <button onClick={onManageFaculty}>Manage Faculty</button>
         </div>
 
         <div className="card">
           <h3>Manage Subjects</h3>
-          <p>Add and manage subjects.</p>
+          <p>Add, view and delete subject details.</p>
+          <button onClick={onManageSubjects}>Manage Subjects</button>
         </div>
 
         <div className="card">
@@ -79,7 +88,6 @@ function AdminDashboard({ onManageStudents, onManageFaculty }) {
           <h3>Monitor Submissions</h3>
           <p>Monitor student assignment submissions.</p>
         </div>
-
       </div>
     </div>
   );
