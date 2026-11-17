@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-function AdminDashboard({ onManageStudents }) {
+function AdminDashboard({ onManageStudents, onManageFaculty }) {
   const [students] = useState(
     JSON.parse(localStorage.getItem("students") || "[]")
   );
@@ -23,9 +23,7 @@ function AdminDashboard({ onManageStudents }) {
       <h1>Admin Dashboard</h1>
       <p>Welcome, Admin!</p>
 
-      {/* Dashboard Statistics */}
       <div className="dashboard-cards">
-
         <div className="card">
           <h3>Total Students</h3>
           <p>{students.length}</p>
@@ -45,10 +43,8 @@ function AdminDashboard({ onManageStudents }) {
           <h3>Total Submissions</h3>
           <p>{submissions.length}</p>
         </div>
-
       </div>
 
-      {/* Management Section */}
       <h2>Management</h2>
 
       <div className="management-list">
@@ -56,7 +52,6 @@ function AdminDashboard({ onManageStudents }) {
         <div className="card">
           <h3>Manage Students</h3>
           <p>Add, view and delete student details.</p>
-
           <button onClick={onManageStudents}>
             Manage Students
           </button>
@@ -64,7 +59,10 @@ function AdminDashboard({ onManageStudents }) {
 
         <div className="card">
           <h3>Manage Faculty</h3>
-          <p>Manage faculty information.</p>
+          <p>Add, view and delete faculty details.</p>
+          <button onClick={onManageFaculty}>
+            Manage Faculty
+          </button>
         </div>
 
         <div className="card">
