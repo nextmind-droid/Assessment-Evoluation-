@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import StudentDashboard from "./pages/StudentDashboard";
 import FacultyDashboard from "./pages/FacultyDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import ManageStudents from "./pages/ManageStudents";
 
 function App() {
   const [role, setRole] = useState("Student");
@@ -12,13 +13,11 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Login function
   const handleLogin = (e) => {
     e.preventDefault();
     setPage("dashboard");
   };
 
-  // Forgot password function
   const handleForgotPassword = (e) => {
     e.preventDefault();
     alert("Password reset functionality will be connected to the backend.");
@@ -30,24 +29,36 @@ function App() {
       <div>
         {role === "Student" && <StudentDashboard />}
         {role === "Faculty" && <FacultyDashboard />}
-        {role === "Admin" && <AdminDashboard />}
+        {role === "Admin" && (
+          <AdminDashboard
+            onManageStudents={() => setPage("manageStudents")}
+          />
+        )}
 
         <button
           onClick={() => {
             setPage("login");
             setPassword("");
           }}
-          style={{
-            padding: "10px 20px",
-            margin: "20px",
-            background: "#4f46e5",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer"
-          }}
+          style={logoutStyle}
         >
           Logout
+        </button>
+      </div>
+    );
+  }
+
+  // Manage Students page
+  if (page === "manageStudents") {
+    return (
+      <div>
+        <ManageStudents />
+
+        <button
+          onClick={() => setPage("dashboard")}
+          style={logoutStyle}
+        >
+          ← Back to Admin Dashboard
         </button>
       </div>
     );
@@ -75,39 +86,21 @@ function App() {
           boxShadow: "0 12px 35px rgba(79, 70, 229, 0.15)"
         }}
       >
-        <h2
-          style={{
-            color: "#4338ca",
-            textAlign: "center",
-            fontSize: "25px",
-            marginBottom: "8px"
-          }}
-        >
+        <h2 style={{ color: "#4338ca", textAlign: "center" }}>
           Assignment Evaluation
         </h2>
 
-        <p
-          style={{
-            textAlign: "center",
-            color: "#64748b",
-            fontSize: "13px",
-            marginBottom: "25px"
-          }}
-        >
+        <p style={{ textAlign: "center", color: "#64748b", fontSize: "13px" }}>
           Anonymous Assignment Evaluation System
         </p>
 
         {page === "login" ? (
           <>
-            <h3 style={{ color: "#1e293b" }}>Welcome Back!</h3>
-
-            <p style={{ color: "#64748b", fontSize: "14px" }}>
-              Please login to continue
-            </p>
+            <h3>Welcome Back!</h3>
+            <p>Please login to continue</p>
 
             <form onSubmit={handleLogin}>
               <label>Select Role</label>
-
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
@@ -119,7 +112,6 @@ function App() {
               </select>
 
               <label>Email Address</label>
-
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -130,7 +122,6 @@ function App() {
               />
 
               <label>Password</label>
-
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
@@ -140,14 +131,7 @@ function App() {
                 required
               />
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "10px",
-                  fontSize: "13px"
-                }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <label>
                   <input
                     type="checkbox"
@@ -173,15 +157,11 @@ function App() {
           </>
         ) : (
           <>
-            <h3 style={{ color: "#1e293b" }}>Forgot Password?</h3>
-
-            <p style={{ color: "#64748b", fontSize: "14px" }}>
-              Enter your registered email address to reset your password.
-            </p>
+            <h3>Forgot Password?</h3>
+            <p>Enter your registered email address to reset your password.</p>
 
             <form onSubmit={handleForgotPassword}>
               <label>Email Address</label>
-
               <input
                 type="email"
                 placeholder="Enter your registered email"
@@ -201,8 +181,7 @@ function App() {
               style={{
                 ...buttonStyle,
                 background: "#e0e7ff",
-                color: "#4338ca",
-                marginTop: "12px"
+                color: "#4338ca"
               }}
             >
               ← Back to Login
@@ -210,14 +189,7 @@ function App() {
           </>
         )}
 
-        <p
-          style={{
-            textAlign: "center",
-            color: "#94a3b8",
-            fontSize: "12px",
-            marginTop: "25px"
-          }}
-        >
+        <p style={{ textAlign: "center", color: "#94a3b8", fontSize: "12px" }}>
           © 2026 Anonymous Assignment Evaluation System
         </p>
       </div>
@@ -225,7 +197,6 @@ function App() {
   );
 }
 
-// Input styling
 const inputStyle = {
   width: "100%",
   padding: "12px",
@@ -234,11 +205,9 @@ const inputStyle = {
   border: "1px solid #cbd5e1",
   borderRadius: "8px",
   boxSizing: "border-box",
-  fontSize: "14px",
-  outlineColor: "#6366f1"
+  fontSize: "14px"
 };
 
-// Button styling
 const buttonStyle = {
   width: "100%",
   padding: "13px",
@@ -252,13 +221,22 @@ const buttonStyle = {
   cursor: "pointer"
 };
 
-// Link styling
 const linkStyle = {
   background: "none",
   border: "none",
   color: "#4f46e5",
   cursor: "pointer",
   fontSize: "13px"
+};
+
+const logoutStyle = {
+  padding: "10px 20px",
+  margin: "20px",
+  background: "#4f46e5",
+  color: "white",
+  border: "none",
+  borderRadius: "8px",
+  cursor: "pointer"
 };
 
 export default App;
