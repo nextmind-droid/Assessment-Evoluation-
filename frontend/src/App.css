@@ -906,6 +906,521 @@ input, select, textarea {
     flex-direction: column;
   }
 
+/* STUDENT DASHBOARD */
+
+.student-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f6fc;
+}
+
+.student-sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #35136f;
+  color: white;
+  padding: 25px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.student-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 10px 35px;
+}
+
+.student-brand-icon {
+  background: white;
+  color: #5b21b6;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.student-brand h2 {
+  font-size: 23px;
+}
+
+.student-brand span {
+  font-size: 12px;
+  color: #d8c9f5;
+}
+
+.student-menu-heading {
+  font-size: 11px;
+  color: #c5b5e8;
+  margin: 10px 10px 12px;
+}
+
+.student-sidebar-link {
+  width: 100%;
+  background: transparent;
+  color: #eee7ff;
+  text-align: left;
+  padding: 14px 12px;
+  border-radius: 8px;
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+.student-sidebar-link:hover,
+.student-sidebar-link.active {
+  background: #6d3bb4;
+  color: white;
+}
+
+.student-sidebar-footer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  padding: 15px 5px;
+  border-top: 1px solid #68469a;
+  font-size: 11px;
+}
+
+.student-sidebar-footer small {
+  display: block;
+  color: #d8c9f5;
+  margin-top: 5px;
+}
+
+.student-main {
+  flex: 1;
+  min-width: 0;
+  padding: 30px;
+}
+
+.student-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.student-header h1 {
+  color: #32116d;
+  font-size: 27px;
+  margin-bottom: 7px;
+}
+
+.student-header p,
+.student-section-heading p {
+  color: #817b91;
+  font-size: 13px;
+}
+
+.student-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 12px;
+}
+
+.student-profile-icon {
+  background: #eadfff;
+  color: #5b21b6;
+  border-radius: 50%;
+  padding: 10px 14px;
+  font-weight: bold;
+}
+
+.student-profile strong,
+.student-profile small {
+  display: block;
+  font-size: 12px;
+}
+
+.student-profile small {
+  color: #817b91;
+  margin-top: 4px;
+}
+
+.student-welcome {
+  background: linear-gradient(120deg, #5522a0, #8555d4);
+  color: white;
+  padding: 28px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.student-welcome h2 {
+  margin-bottom: 10px;
+}
+
+.student-welcome p {
+  color: #eee5ff;
+  font-size: 14px;
+  margin: 0;
+}
+
+.student-welcome-icon {
+  font-size: 45px;
+}
+
+.student-section {
+  margin-bottom: 32px;
+  scroll-margin-top: 20px;
+}
+
+.student-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 17px;
+}
+
+.student-section-heading h2 {
+  color: #30204e;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.student-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.student-stat-card {
+  background: white;
+  border: 1px solid #eee9f7;
+  padding: 20px;
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(50, 20, 90, 0.04);
+}
+
+.student-stat-icon {
+  display: inline-block;
+  padding: 11px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.student-stat-icon.purple {
+  background: #eee4ff;
+}
+
+.student-stat-icon.orange {
+  background: #fff0df;
+}
+
+.student-stat-icon.blue {
+  background: #e2efff;
+}
+
+.student-stat-icon.green {
+  background: #e1f8eb;
+}
+
+.student-stat-card p {
+  color: #817b91;
+  font-size: 12px;
+  margin: 12px 0 7px;
+}
+
+.student-stat-card h2 {
+  color: #32116d;
+  font-size: 27px;
+}
+
+.student-assignment-grid,
+.student-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 17px;
+}
+
+.student-assignment-card,
+.student-result-card {
+  background: white;
+  border: 1px solid #eee9f7;
+  border-radius: 13px;
+  padding: 21px;
+  box-shadow: 0 3px 12px rgba(50, 20, 90, 0.04);
+  min-width: 0;
+}
+
+.student-card-top,
+.student-result-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 17px;
+}
+
+.student-assignment-icon,
+.student-result-icon {
+  background: #eee4ff;
+  padding: 11px;
+  border-radius: 9px;
+  font-size: 21px;
+}
+
+.student-assignment-card h3,
+.student-result-card h3 {
+  color: #40216e;
+  font-size: 16px;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+.student-subject {
+  color: #7c55b6;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.student-assignment-info {
+  border-top: 1px solid #f0edf5;
+  padding-top: 12px;
+}
+
+.student-assignment-info p {
+  color: #817b91;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 7px 0;
+  overflow-wrap: anywhere;
+}
+
+.student-assignment-info strong {
+  color: #51436a;
+}
+
+.student-status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.student-status.pending {
+  background: #fff0df;
+  color: #a65c0b;
+}
+
+.student-status.submitted,
+.student-status.evaluated {
+  background: #e5f8ed;
+  color: #23834b;
+}
+
+.student-submit-button {
+  width: 100%;
+  background: #6d28d9;
+  color: white;
+  border: none;
+  padding: 11px;
+  border-radius: 7px;
+  font-size: 12px;
+  margin: 15px 0 0;
+}
+
+.student-submit-button:hover {
+  background: #4c1d95;
+}
+
+.student-deadline-card {
+  background: white;
+  border: 1px solid #eee9f7;
+  border-radius: 13px;
+  padding: 10px 20px;
+}
+
+.student-deadline-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0edf5;
+}
+
+.student-deadline-row:last-child {
+  border-bottom: none;
+}
+
+.student-deadline-icon {
+  background: #fff0df;
+  padding: 11px;
+  border-radius: 9px;
+}
+
+.student-deadline-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.student-deadline-details strong,
+.student-deadline-details span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.student-deadline-details strong {
+  color: #40216e;
+  font-size: 13px;
+}
+
+.student-deadline-details span {
+  color: #817b91;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.student-deadline-date {
+  text-align: right;
+}
+
+.student-deadline-date small,
+.student-deadline-date strong {
+  display: block;
+  font-size: 11px;
+}
+
+.student-deadline-date small {
+  color: #817b91;
+  margin-bottom: 5px;
+}
+
+.student-deadline-date strong {
+  color: #40216e;
+}
+
+.student-deadline-row button {
+  background: #6d28d9;
+  color: white;
+  padding: 9px 13px;
+  border-radius: 7px;
+  font-size: 11px;
+}
+
+.student-marks-box {
+  background: #f1eaff;
+  padding: 16px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.student-marks-box small {
+  color: #817b91;
+  font-size: 12px;
+}
+
+.student-marks-box h2 {
+  color: #5b21b6;
+  font-size: 25px;
+  margin-top: 7px;
+}
+
+.student-result-file {
+  color: #817b91;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.student-feedback-label {
+  color: #40216e;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.student-feedback {
+  background: #f7f4fc;
+  color: #625875;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.student-evaluation-date {
+  color: #817b91;
+  font-size: 11px;
+  margin-top: 13px;
+}
+
+.student-empty {
+  background: white;
+  border: 1px solid #eee9f7;
+  border-radius: 13px;
+  text-align: center;
+  padding: 30px;
+  color: #817b91;
+}
+
+.student-empty span {
+  font-size: 30px;
+}
+
+.student-empty p {
+  font-size: 13px;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .student-layout {
+    flex-direction: column;
+  }
+
+  .student-sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .student-sidebar-footer {
+    margin-top: 15px;
+  }
+
+  .student-main {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .student-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .student-welcome {
+    padding: 20px;
+  }
+
+  .student-welcome h2 {
+    font-size: 19px;
+  }
+
+  .student-profile {
+    width: fit-content;
+  }
+
+  .student-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .student-deadline-date {
+    display: none;
+  }
+}
+
   .faculty-deadline {
     display: none;
   }
