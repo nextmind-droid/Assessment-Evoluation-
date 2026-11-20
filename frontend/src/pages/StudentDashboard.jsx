@@ -7,7 +7,6 @@ function StudentDashboard() {
   const [submissions, setSubmissions] = useState([]);
   const [selectedAssignment, setSelectedAssignment] = useState(null);
 
-  // Load assignments and submissions
   const loadData = () => {
     const savedAssignments = JSON.parse(
       localStorage.getItem("assignments") || "[]"
@@ -25,7 +24,6 @@ function StudentDashboard() {
     loadData();
   }, []);
 
-  // Check assignment submission status
   const isSubmitted = (assignmentId) => {
     return submissions.some(
       (submission) =>
@@ -33,7 +31,6 @@ function StudentDashboard() {
     );
   };
 
-  // Get evaluated submissions
   const evaluatedSubmissions = submissions.filter(
     (item) => item.status === "Evaluated"
   );
@@ -44,7 +41,16 @@ function StudentDashboard() {
 
   const pendingCount = assignments.length - submittedCount;
 
-  // Open student submission page
+  const upcomingAssignments = assignments
+    .filter((item) => !isSubmitted(item.id))
+    .slice(0, 3);
+
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth"
+    });
+  };
+
   if (selectedAssignment) {
     return (
       <StudentSubmission
@@ -58,244 +64,307 @@ function StudentDashboard() {
   }
 
   return (
-    <div className="dashboard">
-      <h1>Student Dashboard</h1>
+    <div className="student-layout">
 
-      <p>
-        Welcome to the Anonymous Assignment Evaluation System!
-      </p>
-
-      {/* Dashboard Statistics */}
-      <div className="dashboard-cards">
-        <div className="card">
-          <h3>Total Assignments</h3>
-          <h2>{assignments.length}</h2>
+      <aside className="student-sidebar">
+        <div className="student-brand">
+          <div className="student-brand-icon">AA</div>
+          <div>
+            <h2>AAES</h2>
+            <span>Student Portal</span>
+          </div>
         </div>
 
-        <div className="card">
-          <h3>Pending Assignments</h3>
-          <h2>{pendingCount}</h2>
+        <p className="student-menu-heading">MAIN MENU</p>
+
+        <button
+          className="student-sidebar-link active"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          🏠 Dashboard
+        </button>
+
+        <button
+          className="student-sidebar-link"
+          onClick={() => scrollToSection("student-assignments")}
+        >
+          📚 My Assignments
+        </button>
+
+        <button
+          className="student-sidebar-link"
+          onClick={() => scrollToSection("student-deadlines")}
+        >
+          ⏰ Upcoming Deadlines
+        </button>
+
+        <button
+          className="student-sidebar-link"
+          onClick={() => scrollToSection("student-results")}
+        >
+          🏆 My Results
+        </button>
+
+        <div className="student-sidebar-footer">
+          <span>🎓</span>
+          <div>
+            <strong>Student Panel</strong>
+            <small>Assignment Evaluation</small>
+          </div>
         </div>
+      </aside>
 
-        <div className="card">
-          <h3>Submitted Assignments</h3>
-          <h2>{submittedCount}</h2>
-        </div>
+      <main className="student-main">
 
-        <div className="card">
-          <h3>Published Results</h3>
-          <h2>{evaluatedSubmissions.length}</h2>
-        </div>
-      </div>
+        <header className="student-header">
+          <div>
+            <h1>Student Dashboard</h1>
+            <p>View assignments, submit work and track your results.</p>
+          </div>
 
-      {/* Available Assignments */}
-      <h2>My Assignments</h2>
+          <div className="student-profile">
+            <div className="student-profile-icon">S</div>
+            <div>
+              <strong>Student</strong>
+              <small>Student Portal</small>
+            </div>
+          </div>
+        </header>
 
-      <p>
-        View assignments created by your faculty here.
-      </p>
+        <section className="student-welcome">
+          <div>
+            <h2>Welcome Back, Student! 👋</h2>
+            <p>
+              Stay on track with your assignments and keep learning.
+            </p>
+          </div>
+          <div className="student-welcome-icon">🎓</div>
+        </section>
 
-      {assignments.length === 0 ? (
-        <p style={styles.empty}>
-          No assignments available yet.
-        </p>
-      ) : (
-        <div style={styles.assignmentList}>
-          {assignments.map((item) => {
-            const submitted = isSubmitted(item.id);
+        <section className="student-section">
+          <div className="student-section-heading">
+            <div>
+              <h2>My Academic Overview</h2>
+              <p>Your assignment and result summary</p>
+            </div>
+          </div>
 
-            return (
-              <div key={item.id} style={styles.assignmentCard}>
-                <h3 style={styles.title}>{item.title}</h3>
+          <div className="student-stats-grid">
+            <div className="student-stat-card">
+              <div className="student-stat-icon purple">📚</div>
+              <p>Total Assignments</p>
+              <h2>{assignments.length}</h2>
+            </div>
 
-                <p><b>Subject:</b> {item.subject}</p>
-                <p><b>Description:</b> {item.description}</p>
-                <p><b>Assigned Date:</b> {item.assignedDate}</p>
-                <p><b>Submission Deadline:</b> {item.deadline}</p>
-                <p><b>Maximum Marks:</b> {item.maxMarks}</p>
+            <div className="student-stat-card">
+              <div className="student-stat-icon orange">⏳</div>
+              <p>Pending Assignments</p>
+              <h2>{pendingCount}</h2>
+            </div>
 
-                <p>
-                  <b>Attachment:</b>{" "}
-                  {item.fileName || "No attachment"}
-                </p>
+            <div className="student-stat-card">
+              <div className="student-stat-icon blue">📤</div>
+              <p>Submitted Assignments</p>
+              <h2>{submittedCount}</h2>
+            </div>
 
-                <span
-                  style={
-                    submitted
-                      ? styles.submittedStatus
-                      : styles.status
-                  }
-                >
-                  {submitted ? "Submitted" : "Pending Submission"}
-                </span>
+            <div className="student-stat-card">
+              <div className="student-stat-icon green">🏆</div>
+              <p>Published Results</p>
+              <h2>{evaluatedSubmissions.length}</h2>
+            </div>
+          </div>
+        </section>
 
-                <br />
+        <section className="student-section" id="student-assignments">
+          <div className="student-section-heading">
+            <div>
+              <h2>My Assignments</h2>
+              <p>Assignments created by your faculty</p>
+            </div>
+          </div>
 
-                <button
-                  style={styles.submitButton}
-                  onClick={() => setSelectedAssignment(item)}
-                >
-                  {submitted ? "View / Resubmit" : "Submit Assignment"}
-                </button>
+          {assignments.length === 0 ? (
+            <div className="student-empty">
+              <span>📭</span>
+              <p>No assignments available yet.</p>
+            </div>
+          ) : (
+            <div className="student-assignment-grid">
+              {assignments.map((item) => {
+                const submitted = isSubmitted(item.id);
+
+                return (
+                  <div className="student-assignment-card" key={item.id}>
+                    <div className="student-card-top">
+                      <div className="student-assignment-icon">📝</div>
+
+                      <span
+                        className={
+                          submitted
+                            ? "student-status submitted"
+                            : "student-status pending"
+                        }
+                      >
+                        {submitted ? "Submitted" : "Pending"}
+                      </span>
+                    </div>
+
+                    <h3>{item.title}</h3>
+
+                    <p className="student-subject">
+                      {item.subject || "Subject not specified"}
+                    </p>
+
+                    <div className="student-assignment-info">
+                      <p>
+                        <strong>Description:</strong>{" "}
+                        {item.description || "No description available"}
+                      </p>
+
+                      <p>
+                        <strong>Assigned Date:</strong>{" "}
+                        {item.assignedDate || "Not specified"}
+                      </p>
+
+                      <p>
+                        <strong>Deadline:</strong>{" "}
+                        {item.deadline || "Not specified"}
+                      </p>
+
+                      <p>
+                        <strong>Maximum Marks:</strong>{" "}
+                        {item.maxMarks || 100}
+                      </p>
+
+                      <p>
+                        <strong>Attachment:</strong>{" "}
+                        {item.fileName || "No attachment"}
+                      </p>
+                    </div>
+
+                    <button
+                      className="student-submit-button"
+                      onClick={() => setSelectedAssignment(item)}
+                    >
+                      {submitted ? "View / Resubmit →" : "Submit Assignment →"}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        <section className="student-section" id="student-deadlines">
+          <div className="student-section-heading">
+            <div>
+              <h2>Upcoming Deadlines</h2>
+              <p>Assignments that you have not submitted yet</p>
+            </div>
+          </div>
+
+          <div className="student-deadline-card">
+            {upcomingAssignments.length > 0 ? (
+              upcomingAssignments.map((item) => (
+                <div className="student-deadline-row" key={item.id}>
+                  <div className="student-deadline-icon">⏰</div>
+
+                  <div className="student-deadline-details">
+                    <strong>{item.title}</strong>
+                    <span>{item.subject || "Subject not specified"}</span>
+                  </div>
+
+                  <div className="student-deadline-date">
+                    <small>Due date</small>
+                    <strong>{item.deadline || "Not specified"}</strong>
+                  </div>
+
+                  <button
+                    onClick={() => setSelectedAssignment(item)}
+                  >
+                    Submit
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="student-empty">
+                <span>🎉</span>
+                <p>You have no pending assignments!</p>
               </div>
-            );
-          })}
-        </div>
-      )}
+            )}
+          </div>
+        </section>
 
-      {/* Student Results Section */}
-      <h2>My Results & Feedback</h2>
+        <section className="student-section" id="student-results">
+          <div className="student-section-heading">
+            <div>
+              <h2>My Results & Feedback</h2>
+              <p>Marks and feedback provided by faculty</p>
+            </div>
+          </div>
 
-      <p>
-        View your marks and faculty feedback after evaluation.
-      </p>
+          {evaluatedSubmissions.length === 0 ? (
+            <div className="student-empty">
+              <span>🏆</span>
+              <p>
+                No results available yet. Your results will appear
+                after faculty evaluates your assignments.
+              </p>
+            </div>
+          ) : (
+            <div className="student-results-grid">
+              {evaluatedSubmissions.map((item) => {
+                const assignment = assignments.find(
+                  (a) =>
+                    String(a.id) === String(item.assignmentId)
+                );
 
-      {evaluatedSubmissions.length === 0 ? (
-        <p style={styles.empty}>
-          No results available yet. Your results will appear
-          after faculty evaluates your assignments.
-        </p>
-      ) : (
-        <div style={styles.assignmentList}>
-          {evaluatedSubmissions.map((item) => {
-            const assignment = assignments.find(
-              (a) =>
-                String(a.id) === String(item.assignmentId)
-            );
+                return (
+                  <div className="student-result-card" key={item.id}>
+                    <div className="student-result-heading">
+                      <div className="student-result-icon">🏆</div>
+                      <span className="student-status evaluated">
+                        Evaluated
+                      </span>
+                    </div>
 
-            return (
-              <div key={item.id} style={styles.resultCard}>
-                <h3 style={styles.title}>
-                  {item.assignmentTitle}
-                </h3>
+                    <h3>
+                      {item.assignmentTitle || "Assignment"}
+                    </h3>
 
-                <p>
-                  <b>File:</b> {item.fileName}
-                </p>
+                    <p className="student-result-file">
+                      File: {item.fileName || "Submitted file"}
+                    </p>
 
-                <p>
-                  <b>Marks Obtained:</b>{" "}
-                  <span style={styles.marks}>
-                    {item.marks} / {assignment?.maxMarks || 100}
-                  </span>
-                </p>
+                    <div className="student-marks-box">
+                      <small>Marks Obtained</small>
+                      <h2>
+                        {item.marks} / {assignment?.maxMarks || 100}
+                      </h2>
+                    </div>
 
-                <p>
-                  <b>Feedback:</b>
-                </p>
+                    <p className="student-feedback-label">
+                      Faculty Feedback
+                    </p>
 
-                <p style={styles.feedback}>
-                  {item.feedback || "No feedback provided."}
-                </p>
+                    <p className="student-feedback">
+                      {item.feedback || "No feedback provided."}
+                    </p>
 
-                <p>
-                  <b>Evaluation Date:</b>{" "}
-                  {item.evaluatedAt || "Not available"}
-                </p>
+                    <p className="student-evaluation-date">
+                      Evaluation Date: {item.evaluatedAt || "Not available"}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
 
-                <span style={styles.evaluatedStatus}>
-                  Evaluated
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      </main>
     </div>
   );
 }
-
-const styles = {
-  assignmentList: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "20px",
-    marginTop: "20px"
-  },
-
-  assignmentCard: {
-    background: "#ffffff",
-    padding: "20px",
-    borderRadius: "12px",
-    boxShadow: "0 3px 12px rgba(0,0,0,0.08)",
-    borderLeft: "5px solid #4f46e5",
-    color: "#334155"
-  },
-
-  resultCard: {
-    background: "#ffffff",
-    padding: "20px",
-    borderRadius: "12px",
-    boxShadow: "0 3px 12px rgba(0,0,0,0.08)",
-    borderLeft: "5px solid #16a34a",
-    color: "#334155"
-  },
-
-  title: {
-    color: "#4338ca",
-    marginTop: "0"
-  },
-
-  status: {
-    display: "inline-block",
-    marginTop: "10px",
-    padding: "7px 12px",
-    background: "#fef3c7",
-    color: "#92400e",
-    borderRadius: "6px",
-    fontSize: "13px",
-    fontWeight: "bold"
-  },
-
-  submittedStatus: {
-    display: "inline-block",
-    marginTop: "10px",
-    padding: "7px 12px",
-    background: "#dcfce7",
-    color: "#166534",
-    borderRadius: "6px",
-    fontSize: "13px",
-    fontWeight: "bold"
-  },
-
-  evaluatedStatus: {
-    display: "inline-block",
-    padding: "7px 12px",
-    background: "#dcfce7",
-    color: "#166534",
-    borderRadius: "6px",
-    fontSize: "13px",
-    fontWeight: "bold"
-  },
-
-  marks: {
-    color: "#15803d",
-    fontSize: "18px",
-    fontWeight: "bold"
-  },
-
-  feedback: {
-    background: "#f1f5f9",
-    padding: "12px",
-    borderRadius: "8px"
-  },
-
-  submitButton: {
-    marginTop: "15px",
-    padding: "10px 16px",
-    background: "#4f46e5",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer"
-  },
-
-  empty: {
-    padding: "20px",
-    background: "#f1f5f9",
-    borderRadius: "8px",
-    color: "#64748b"
-  }
-};
 
 export default StudentDashboard;
