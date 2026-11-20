@@ -1,4 +1,8 @@
 
+/* =================================
+   GLOBAL STYLES
+================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -66,7 +70,9 @@ button:hover {
   background: #4c1d95;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   padding: 11px;
   border: 1px solid #d8ccf5;
   border-radius: 7px;
@@ -74,25 +80,21 @@ input, select, textarea {
   max-width: 100%;
 }
 
-@media (max-width: 600px) {
-  .dashboard {
-    padding: 16px;
-  }
+/* =================================
+   ADMIN DASHBOARD
+================================= */
 
-  .dashboard-cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ADMIN DASHBOARD */
-
-.admin-layout {
+.admin-layout,
+.faculty-layout,
+.student-layout {
   display: flex;
   min-height: 100vh;
   background: #f7f6fc;
 }
 
-.admin-sidebar {
+.admin-sidebar,
+.faculty-sidebar,
+.student-sidebar {
   width: 250px;
   min-height: 100vh;
   background: #35136f;
@@ -103,14 +105,20 @@ input, select, textarea {
   flex-shrink: 0;
 }
 
-.admin-brand {
+/* Admin Sidebar */
+
+.admin-brand,
+.faculty-brand,
+.student-brand {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 5px 10px 35px;
 }
 
-.brand-icon {
+.brand-icon,
+.faculty-brand-icon,
+.student-brand-icon {
   background: white;
   color: #5b21b6;
   font-weight: bold;
@@ -118,22 +126,30 @@ input, select, textarea {
   border-radius: 10px;
 }
 
-.admin-brand h2 {
+.admin-brand h2,
+.faculty-brand h2,
+.student-brand h2 {
   font-size: 23px;
 }
 
-.admin-brand span {
+.admin-brand span,
+.faculty-brand span,
+.student-brand span {
   font-size: 12px;
   color: #d8c9f5;
 }
 
-.sidebar-heading {
+.sidebar-heading,
+.faculty-menu-heading,
+.student-menu-heading {
   font-size: 11px;
   color: #c5b5e8;
   margin: 10px 10px 12px;
 }
 
-.sidebar-link {
+.sidebar-link,
+.faculty-sidebar-link,
+.student-sidebar-link {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -148,12 +164,18 @@ input, select, textarea {
 }
 
 .sidebar-link:hover,
-.sidebar-link.active {
+.sidebar-link.active,
+.faculty-sidebar-link:hover,
+.faculty-sidebar-link.active,
+.student-sidebar-link:hover,
+.student-sidebar-link.active {
   background: #6d3bb4;
   color: white;
 }
 
-.sidebar-footer {
+.sidebar-footer,
+.faculty-sidebar-footer,
+.student-sidebar-footer {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -163,19 +185,27 @@ input, select, textarea {
   font-size: 11px;
 }
 
-.sidebar-footer small {
+.sidebar-footer small,
+.faculty-sidebar-footer small,
+.student-sidebar-footer small {
   display: block;
   color: #d8c9f5;
   margin-top: 5px;
 }
 
-.admin-main {
+/* Admin Main Content */
+
+.admin-main,
+.faculty-main,
+.student-main {
   flex: 1;
   min-width: 0;
   padding: 30px;
 }
 
-.admin-header {
+.admin-header,
+.faculty-header,
+.student-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -183,19 +213,29 @@ input, select, textarea {
   margin-bottom: 25px;
 }
 
-.admin-header h1 {
+.admin-header h1,
+.faculty-header h1,
+.student-header h1 {
   color: #32116d;
   font-size: 27px;
   margin-bottom: 7px;
 }
 
 .admin-header p,
-.section-heading p {
+.section-heading p,
+.faculty-header p,
+.faculty-section-heading p,
+.student-header p,
+.student-section-heading p {
   color: #817b91;
   font-size: 13px;
 }
 
-.admin-profile {
+/* Profiles */
+
+.admin-profile,
+.faculty-profile,
+.student-profile {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -204,7 +244,9 @@ input, select, textarea {
   border-radius: 12px;
 }
 
-.profile-icon {
+.profile-icon,
+.faculty-profile-icon,
+.student-profile-icon {
   background: #eadfff;
   color: #5b21b6;
   border-radius: 50%;
@@ -213,17 +255,27 @@ input, select, textarea {
 }
 
 .admin-profile strong,
-.admin-profile small {
+.admin-profile small,
+.faculty-profile strong,
+.faculty-profile small,
+.student-profile strong,
+.student-profile small {
   display: block;
   font-size: 12px;
 }
 
-.admin-profile small {
+.admin-profile small,
+.faculty-profile small,
+.student-profile small {
   color: #817b91;
   margin-top: 4px;
 }
 
-.admin-welcome {
+/* Welcome Sections */
+
+.admin-welcome,
+.faculty-welcome,
+.student-welcome {
   background: linear-gradient(120deg, #5522a0, #8555d4);
   color: white;
   padding: 28px;
@@ -234,44 +286,66 @@ input, select, textarea {
   margin-bottom: 30px;
 }
 
-.admin-welcome h2 {
+.admin-welcome h2,
+.faculty-welcome h2,
+.student-welcome h2 {
   margin-bottom: 10px;
 }
 
-.admin-welcome p {
+.admin-welcome p,
+.faculty-welcome p,
+.student-welcome p {
   color: #eee5ff;
   font-size: 14px;
   margin: 0;
+  line-height: 1.6;
 }
 
-.welcome-icon {
+.welcome-icon,
+.faculty-welcome-icon,
+.student-welcome-icon {
   font-size: 45px;
 }
 
-.admin-section {
+/* Admin Sections */
+
+.admin-section,
+.faculty-section,
+.student-section {
   margin-bottom: 32px;
 }
 
-.section-heading {
+.section-heading,
+.faculty-section-heading,
+.student-section-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   margin-bottom: 17px;
 }
 
-.section-heading h2 {
+.section-heading h2,
+.faculty-section-heading h2,
+.student-section-heading h2 {
   color: #30204e;
   font-size: 20px;
   margin-bottom: 6px;
 }
 
-.admin-stats-grid {
+/* Admin Statistics */
+
+.admin-stats-grid,
+.faculty-stats-grid,
+.student-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
 }
 
-.admin-stat-card {
+.admin-stat-card,
+.faculty-stat-card,
+.student-stat-card {
   background: white;
   border: 1px solid #eee9f7;
   padding: 20px;
@@ -279,37 +353,51 @@ input, select, textarea {
   box-shadow: 0 3px 12px rgba(50, 20, 90, 0.04);
 }
 
-.admin-stat-card p {
+.admin-stat-card p,
+.faculty-stat-card p,
+.student-stat-card p {
   color: #817b91;
   font-size: 12px;
   margin: 12px 0 7px;
 }
 
-.admin-stat-card h2 {
+.admin-stat-card h2,
+.faculty-stat-card h2,
+.student-stat-card h2 {
   color: #32116d;
   font-size: 27px;
 }
 
-.stat-icon {
+.stat-icon,
+.faculty-stat-icon,
+.student-stat-icon {
   display: inline-block;
   padding: 11px;
   border-radius: 10px;
   font-size: 20px;
 }
 
-.stat-icon.purple {
+.stat-icon.purple,
+.faculty-stat-icon.purple,
+.student-stat-icon.purple {
   background: #eee4ff;
 }
 
-.stat-icon.blue {
+.stat-icon.blue,
+.faculty-stat-icon.blue,
+.student-stat-icon.blue {
   background: #e2efff;
 }
 
-.stat-icon.orange {
+.stat-icon.orange,
+.faculty-stat-icon.orange,
+.student-stat-icon.orange {
   background: #fff0df;
 }
 
-.stat-icon.green {
+.stat-icon.green,
+.faculty-stat-icon.green,
+.student-stat-icon.green {
   background: #e1f8eb;
 }
 
@@ -317,396 +405,16 @@ input, select, textarea {
   background: #ffe7f1;
 }
 
-.admin-management-grid {
+/* Admin Management Cards */
+
+.admin-management-grid,
+.faculty-actions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 17px;
 }
 
-.admin-management-card {
-  background: white;
-  border: 1px solid #eee9f7;
-  border-radius: 13px;
-  padding: 22px;
-  box-shadow: 0 3px 12px rgba(50, 20, 90, 0.04);
-}
-
-.management-icon {
-  font-size: 27px;
-  margin-bottom: 15px;
-}
-
-.admin-management-card h3 {
-  color: #40216e;
-  font-size: 16px;
-  margin-bottom: 9px;
-}
-
-.admin-management-card p {
-  color: #817b91;
-  font-size: 12px;
-  line-height: 1.6;
-  min-height: 38px;
-}
-
-.admin-management-card button,
-.view-all-button {
-  background: #6d28d9;
-  color: white;
-  border: none;
-  padding: 10px 13px;
-  border-radius: 7px;
-  font-size: 12px;
-  margin: 12px 0 0;
-}
-
-.admin-management-card button:hover,
-.view-all-button:hover {
-  background: #4c1d95;
-}
-
-.recent-activity-card {
-  background: white;
-  border: 1px solid #eee9f7;
-  border-radius: 13px;
-  padding: 10px 20px;
-}
-
-.activity-row {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 15px 0;
-  border-bottom: 1px solid #f0edf5;
-}
-
-.activity-row:last-child {
-  border-bottom: none;
-}
-
-.activity-icon {
-  background: #eee4ff;
-  padding: 11px;
-  border-radius: 9px;
-}
-
-.activity-details {
-  flex: 1;
-  min-width: 0;
-}
-
-.activity-details strong,
-.activity-details span {
-  display: block;
-  overflow-wrap: anywhere;
-}
-
-.activity-details strong {
-  color: #40216e;
-  font-size: 13px;
-}
-
-.activity-details span {
-  color: #817b91;
-  font-size: 11px;
-  margin-top: 5px;
-}
-
-.activity-status {
-  background: #e5f8ed;
-  color: #23834b;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-}
-
-.empty-activity {
-  text-align: center;
-  padding: 30px;
-  color: #817b91;
-}
-
-.empty-activity span {
-  font-size: 30px;
-}
-
-.empty-activity p {
-  margin-top: 10px;
-  font-size: 13px;
-}
-
-@media (max-width: 800px) {
-  .admin-layout {
-    flex-direction: column;
-  }
-
-  .admin-sidebar {
-    width: 100%;
-    min-height: auto;
-  }
-
-  .sidebar-footer {
-    margin-top: 15px;
-  }
-
-  .admin-main {
-    padding: 18px;
-  }
-}
-
-@media (max-width: 500px) {
-  .admin-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .admin-welcome {
-    padding: 20px;
-  }
-
-  .admin-welcome h2 {
-    font-size: 19px;
-  }
-
-  .admin-profile {
-    width: fit-content;
-  }
-}
-
-/* FACULTY DASHBOARD */
-
-.faculty-layout {
-  display: flex;
-  min-height: 100vh;
-  background: #f7f6fc;
-}
-
-.faculty-sidebar {
-  width: 250px;
-  min-height: 100vh;
-  background: #35136f;
-  color: white;
-  padding: 25px 16px;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
-
-.faculty-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 5px 10px 35px;
-}
-
-.faculty-brand-icon {
-  background: white;
-  color: #5b21b6;
-  font-weight: bold;
-  padding: 12px;
-  border-radius: 10px;
-}
-
-.faculty-brand h2 {
-  font-size: 23px;
-}
-
-.faculty-brand span {
-  font-size: 12px;
-  color: #d8c9f5;
-}
-
-.faculty-menu-heading {
-  font-size: 11px;
-  color: #c5b5e8;
-  margin: 10px 10px 12px;
-}
-
-.faculty-sidebar-link {
-  width: 100%;
-  background: transparent;
-  color: #eee7ff;
-  text-align: left;
-  padding: 14px 12px;
-  border-radius: 8px;
-  margin: 4px 0;
-  font-size: 13px;
-}
-
-.faculty-sidebar-link:hover,
-.faculty-sidebar-link.active {
-  background: #6d3bb4;
-  color: white;
-}
-
-.faculty-sidebar-footer {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: auto;
-  padding: 15px 5px;
-  border-top: 1px solid #68469a;
-  font-size: 11px;
-}
-
-.faculty-sidebar-footer small {
-  display: block;
-  color: #d8c9f5;
-  margin-top: 5px;
-}
-
-.faculty-main {
-  flex: 1;
-  min-width: 0;
-  padding: 30px;
-}
-
-.faculty-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.faculty-header h1 {
-  color: #32116d;
-  font-size: 27px;
-  margin-bottom: 7px;
-}
-
-.faculty-header p,
-.faculty-section-heading p {
-  color: #817b91;
-  font-size: 13px;
-}
-
-.faculty-profile {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  padding: 10px 15px;
-  border-radius: 12px;
-}
-
-.faculty-profile-icon {
-  background: #eadfff;
-  color: #5b21b6;
-  border-radius: 50%;
-  padding: 10px 14px;
-  font-weight: bold;
-}
-
-.faculty-profile strong,
-.faculty-profile small {
-  display: block;
-  font-size: 12px;
-}
-
-.faculty-profile small {
-  color: #817b91;
-  margin-top: 4px;
-}
-
-.faculty-welcome {
-  background: linear-gradient(120deg, #5522a0, #8555d4);
-  color: white;
-  padding: 28px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.faculty-welcome h2 {
-  margin-bottom: 10px;
-}
-
-.faculty-welcome p {
-  color: #eee5ff;
-  font-size: 14px;
-  margin: 0;
-  line-height: 1.6;
-}
-
-.faculty-welcome-icon {
-  font-size: 45px;
-}
-
-.faculty-section {
-  margin-bottom: 32px;
-}
-
-.faculty-section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 17px;
-}
-
-.faculty-section-heading h2 {
-  color: #30204e;
-  font-size: 20px;
-  margin-bottom: 6px;
-}
-
-.faculty-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-}
-
-.faculty-stat-card {
-  background: white;
-  border: 1px solid #eee9f7;
-  padding: 20px;
-  border-radius: 13px;
-  box-shadow: 0 3px 12px rgba(50, 20, 90, 0.04);
-}
-
-.faculty-stat-icon {
-  display: inline-block;
-  padding: 11px;
-  border-radius: 10px;
-  font-size: 20px;
-}
-
-.faculty-stat-icon.purple {
-  background: #eee4ff;
-}
-
-.faculty-stat-icon.blue {
-  background: #e2efff;
-}
-
-.faculty-stat-icon.orange {
-  background: #fff0df;
-}
-
-.faculty-stat-icon.green {
-  background: #e1f8eb;
-}
-
-.faculty-stat-card p {
-  color: #817b91;
-  font-size: 12px;
-  margin: 12px 0 7px;
-}
-
-.faculty-stat-card h2 {
-  color: #32116d;
-  font-size: 27px;
-}
-
-.faculty-actions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 17px;
-}
-
+.admin-management-card,
 .faculty-action-card {
   background: white;
   border: 1px solid #eee9f7;
@@ -715,17 +423,20 @@ input, select, textarea {
   box-shadow: 0 3px 12px rgba(50, 20, 90, 0.04);
 }
 
+.management-icon,
 .faculty-action-icon {
   font-size: 28px;
   margin-bottom: 14px;
 }
 
+.admin-management-card h3,
 .faculty-action-card h3 {
   color: #40216e;
   font-size: 16px;
   margin-bottom: 9px;
 }
 
+.admin-management-card p,
 .faculty-action-card p {
   color: #817b91;
   font-size: 12px;
@@ -733,6 +444,8 @@ input, select, textarea {
   min-height: 38px;
 }
 
+.admin-management-card button,
+.view-all-button,
 .faculty-action-card button,
 .faculty-view-button,
 .faculty-empty button {
@@ -746,12 +459,17 @@ input, select, textarea {
   cursor: pointer;
 }
 
+.admin-management-card button:hover,
+.view-all-button:hover,
 .faculty-action-card button:hover,
 .faculty-view-button:hover,
 .faculty-empty button:hover {
   background: #4c1d95;
 }
 
+/* Admin Recent Activity */
+
+.recent-activity-card,
 .faculty-assignment-list,
 .faculty-submission-list {
   background: white;
@@ -760,6 +478,7 @@ input, select, textarea {
   padding: 10px 20px;
 }
 
+.activity-row,
 .faculty-assignment-row,
 .faculty-submission-row {
   display: flex;
@@ -769,11 +488,13 @@ input, select, textarea {
   border-bottom: 1px solid #f0edf5;
 }
 
+.activity-row:last-child,
 .faculty-assignment-row:last-child,
 .faculty-submission-row:last-child {
   border-bottom: none;
 }
 
+.activity-icon,
 .faculty-assignment-icon,
 .faculty-submission-icon {
   background: #eee4ff;
@@ -781,12 +502,15 @@ input, select, textarea {
   border-radius: 9px;
 }
 
+.activity-details,
 .faculty-assignment-details,
 .faculty-submission-details {
   flex: 1;
   min-width: 0;
 }
 
+.activity-details strong,
+.activity-details span,
 .faculty-assignment-details strong,
 .faculty-assignment-details span,
 .faculty-submission-details strong,
@@ -795,18 +519,54 @@ input, select, textarea {
   overflow-wrap: anywhere;
 }
 
+.activity-details strong,
 .faculty-assignment-details strong,
 .faculty-submission-details strong {
   color: #40216e;
   font-size: 13px;
 }
 
+.activity-details span,
 .faculty-assignment-details span,
 .faculty-submission-details span {
   color: #817b91;
   font-size: 11px;
   margin-top: 5px;
 }
+
+.activity-status {
+  background: #e5f8ed;
+  color: #23834b;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+
+.empty-activity,
+.faculty-empty,
+.student-empty {
+  text-align: center;
+  padding: 30px;
+  color: #817b91;
+}
+
+.empty-activity span,
+.faculty-empty span,
+.student-empty span {
+  font-size: 30px;
+}
+
+.empty-activity p,
+.faculty-empty p,
+.student-empty p {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =================================
+   FACULTY DASHBOARD
+================================= */
 
 .faculty-deadline {
   text-align: right;
@@ -827,36 +587,26 @@ input, select, textarea {
   color: #40216e;
 }
 
-.faculty-status {
+.faculty-status,
+.student-status {
+  display: inline-block;
   padding: 6px 10px;
   border-radius: 20px;
   font-size: 11px;
   white-space: nowrap;
 }
 
-.faculty-status.pending {
+.faculty-status.pending,
+.student-status.pending {
   background: #fff0df;
   color: #a65c0b;
 }
 
-.faculty-status.evaluated {
+.faculty-status.evaluated,
+.student-status.submitted,
+.student-status.evaluated {
   background: #e5f8ed;
   color: #23834b;
-}
-
-.faculty-empty {
-  text-align: center;
-  padding: 30px;
-  color: #817b91;
-}
-
-.faculty-empty span {
-  font-size: 30px;
-}
-
-.faculty-empty p {
-  margin-top: 10px;
-  font-size: 13px;
 }
 
 .faculty-back-button {
@@ -864,274 +614,11 @@ input, select, textarea {
   padding: 10px 20px;
 }
 
-@media (max-width: 800px) {
-  .faculty-layout {
-    flex-direction: column;
-  }
+/* =================================
+   STUDENT DASHBOARD
+================================= */
 
-  .faculty-sidebar {
-    width: 100%;
-    min-height: auto;
-  }
-
-  .faculty-sidebar-footer {
-    margin-top: 15px;
-  }
-
-  .faculty-main {
-    padding: 18px;
-  }
-}
-
-@media (max-width: 500px) {
-  .faculty-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .faculty-welcome {
-    padding: 20px;
-  }
-
-  .faculty-welcome h2 {
-    font-size: 19px;
-  }
-
-  .faculty-profile {
-    width: fit-content;
-  }
-
-  .faculty-section-heading {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-/* STUDENT DASHBOARD */
-
-.student-layout {
-  display: flex;
-  min-height: 100vh;
-  background: #f7f6fc;
-}
-
-.student-sidebar {
-  width: 250px;
-  min-height: 100vh;
-  background: #35136f;
-  color: white;
-  padding: 25px 16px;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
-
-.student-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 5px 10px 35px;
-}
-
-.student-brand-icon {
-  background: white;
-  color: #5b21b6;
-  font-weight: bold;
-  padding: 12px;
-  border-radius: 10px;
-}
-
-.student-brand h2 {
-  font-size: 23px;
-}
-
-.student-brand span {
-  font-size: 12px;
-  color: #d8c9f5;
-}
-
-.student-menu-heading {
-  font-size: 11px;
-  color: #c5b5e8;
-  margin: 10px 10px 12px;
-}
-
-.student-sidebar-link {
-  width: 100%;
-  background: transparent;
-  color: #eee7ff;
-  text-align: left;
-  padding: 14px 12px;
-  border-radius: 8px;
-  margin: 4px 0;
-  font-size: 13px;
-}
-
-.student-sidebar-link:hover,
-.student-sidebar-link.active {
-  background: #6d3bb4;
-  color: white;
-}
-
-.student-sidebar-footer {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: auto;
-  padding: 15px 5px;
-  border-top: 1px solid #68469a;
-  font-size: 11px;
-}
-
-.student-sidebar-footer small {
-  display: block;
-  color: #d8c9f5;
-  margin-top: 5px;
-}
-
-.student-main {
-  flex: 1;
-  min-width: 0;
-  padding: 30px;
-}
-
-.student-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.student-header h1 {
-  color: #32116d;
-  font-size: 27px;
-  margin-bottom: 7px;
-}
-
-.student-header p,
-.student-section-heading p {
-  color: #817b91;
-  font-size: 13px;
-}
-
-.student-profile {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  padding: 10px 15px;
-  border-radius: 12px;
-}
-
-.student-profile-icon {
-  background: #eadfff;
-  color: #5b21b6;
-  border-radius: 50%;
-  padding: 10px 14px;
-  font-weight: bold;
-}
-
-.student-profile strong,
-.student-profile small {
-  display: block;
-  font-size: 12px;
-}
-
-.student-profile small {
-  color: #817b91;
-  margin-top: 4px;
-}
-
-.student-welcome {
-  background: linear-gradient(120deg, #5522a0, #8555d4);
-  color: white;
-  padding: 28px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.student-welcome h2 {
-  margin-bottom: 10px;
-}
-
-.student-welcome p {
-  color: #eee5ff;
-  font-size: 14px;
-  margin: 0;
-}
-
-.student-welcome-icon {
-  font-size: 45px;
-}
-
-.student-section {
-  margin-bottom: 32px;
-  scroll-margin-top: 20px;
-}
-
-.student-section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 17px;
-}
-
-.student-section-heading h2 {
-  color: #30204e;
-  font-size: 20px;
-  margin-bottom: 6px;
-}
-
-.student-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-}
-
-.student-stat-card {
-  background: white;
-  border: 1px solid #eee9f7;
-  padding: 20px;
-  border-radius: 13px;
-  box-shadow: 0 3px 12px rgba(50, 20, 90, 0.04);
-}
-
-.student-stat-icon {
-  display: inline-block;
-  padding: 11px;
-  border-radius: 10px;
-  font-size: 20px;
-}
-
-.student-stat-icon.purple {
-  background: #eee4ff;
-}
-
-.student-stat-icon.orange {
-  background: #fff0df;
-}
-
-.student-stat-icon.blue {
-  background: #e2efff;
-}
-
-.student-stat-icon.green {
-  background: #e1f8eb;
-}
-
-.student-stat-card p {
-  color: #817b91;
-  font-size: 12px;
-  margin: 12px 0 7px;
-}
-
-.student-stat-card h2 {
-  color: #32116d;
-  font-size: 27px;
-}
+/* Student Assignment and Result Cards */
 
 .student-assignment-grid,
 .student-results-grid {
@@ -1199,26 +686,6 @@ input, select, textarea {
   color: #51436a;
 }
 
-.student-status {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.student-status.pending {
-  background: #fff0df;
-  color: #a65c0b;
-}
-
-.student-status.submitted,
-.student-status.evaluated {
-  background: #e5f8ed;
-  color: #23834b;
-}
-
 .student-submit-button {
   width: 100%;
   background: #6d28d9;
@@ -1233,6 +700,8 @@ input, select, textarea {
 .student-submit-button:hover {
   background: #4c1d95;
 }
+
+/* Student Deadlines */
 
 .student-deadline-card {
   background: white;
@@ -1308,6 +777,8 @@ input, select, textarea {
   font-size: 11px;
 }
 
+/* Student Marks and Feedback */
+
 .student-marks-box {
   background: #f1eaff;
   padding: 16px;
@@ -1355,73 +826,84 @@ input, select, textarea {
   margin-top: 13px;
 }
 
-.student-empty {
-  background: white;
-  border: 1px solid #eee9f7;
-  border-radius: 13px;
-  text-align: center;
-  padding: 30px;
-  color: #817b91;
+.student-section {
+  scroll-margin-top: 20px;
 }
 
-.student-empty span {
-  font-size: 30px;
-}
-
-.student-empty p {
-  font-size: 13px;
-  margin-top: 10px;
-  line-height: 1.6;
-}
+/* =================================
+   RESPONSIVE DESIGN
+================================= */
 
 @media (max-width: 800px) {
+  .admin-layout,
+  .faculty-layout,
   .student-layout {
     flex-direction: column;
   }
 
+  .admin-sidebar,
+  .faculty-sidebar,
   .student-sidebar {
     width: 100%;
     min-height: auto;
   }
 
+  .sidebar-footer,
+  .faculty-sidebar-footer,
   .student-sidebar-footer {
     margin-top: 15px;
   }
 
+  .admin-main,
+  .faculty-main,
   .student-main {
     padding: 18px;
   }
 }
 
 @media (max-width: 500px) {
+  .admin-header,
+  .faculty-header,
   .student-header {
     align-items: flex-start;
     flex-direction: column;
   }
 
+  .admin-welcome,
+  .faculty-welcome,
   .student-welcome {
     padding: 20px;
   }
 
+  .admin-welcome h2,
+  .faculty-welcome h2,
   .student-welcome h2 {
     font-size: 19px;
   }
 
+  .admin-profile,
+  .faculty-profile,
   .student-profile {
     width: fit-content;
   }
 
+  .section-heading,
+  .faculty-section-heading,
   .student-section-heading {
     align-items: flex-start;
     flex-direction: column;
   }
 
+  .faculty-deadline,
   .student-deadline-date {
     display: none;
   }
-}
 
-  .faculty-deadline {
-    display: none;
+  .dashboard {
+    padding: 16px;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
   }
 }
