@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import "./App.css";
 
 import StudentDashboard from "./pages/StudentDashboard";
 import FacultyDashboard from "./pages/FacultyDashboard";
